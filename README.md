@@ -1,0 +1,1 @@
+Django app built using a Complete Beginner's Guide to Django
