@@ -43,7 +43,7 @@ class BoardTopicsTests(TestCase):
     def test_board_topics_view_contains_navigation_links(self):
         board_topics_url = reverse('board_topics', kwargs={'pk': 1})
         homepage_url = reverse('home')
-        homepage_url = reverse('homenew_topic', kwargs={'pk': 1})
+        homepage_url = reverse('new_topic', kwargs={'pk': 1})
 
         response = self.client.get(board_topics_url)
 
@@ -84,7 +84,7 @@ class NewTopicTests(TestCase):
         url = reverse('new_topic', kwargs={'pk': 1})
         data = {
             'subject': 'Test title',
-            'message': 'Lorem ipsum dolor sit amet'
+            'message': 'I am the body of this post'
         }
         response = self.client.post(url, data)
         self.assertTrue(Topic.objects.exists())
@@ -92,7 +92,7 @@ class NewTopicTests(TestCase):
 
     def test_new_topic_invalid_post_data(self):
         '''
-        Invalid post data should not redirect
+        Invalid post data should not redirect - sending empty dictionary
         The expected behavior is to show the form again with validation errors
         '''
         url = reverse('new_topic', kwargs={'pk': 1})
@@ -101,7 +101,7 @@ class NewTopicTests(TestCase):
 
     def test_new_topic_invalid_post_data_empty_fields(self):
         '''
-        Invalid post data should not redirect
+        Invalid post data should not redirect - sending empty fields
         The expected behavior is to show the form again with validation errors
         '''
         url = reverse('new_topic', kwargs={'pk': 1})
